@@ -25,7 +25,7 @@ const NORTHBOUND_SLOTS = 5
 
 // NewClientStream starts a new Stream (in the given Session), to be used as a client
 func (s *Session) NewClientStream() *Stream {
-	// no stream creation after goaway has been recieved
+	// no stream creation after goaway has been received
 	if !s.goaway_recvd {
 		str := &Stream{
 			id:                s.nextStreamID(),
@@ -68,7 +68,7 @@ func (s *Session) NewClientStream() *Stream {
 }
 
 func (s *Session) newServerStream(frame controlFrame) (str *Stream, err error) {
-	// no stream creation after goaway has been recieved
+	// no stream creation after goaway has been received
 	if !s.goaway_recvd {
 		str = &Stream{
 			id:                frame.streamID(),
@@ -369,9 +369,9 @@ func (s *Stream) initiate_stream(frame controlFrame) (err error) {
 
 			case <-deadline:
 				//unsuccessfully waited for FIN
-				// no activity in a while. Assume that body is completely recieved. Bail
-				//panic("Waited long enough but no data frames recieved")
-				debug.Println("Waited long enough but no data frames recieved")
+				// no activity in a while. Assume that body is completely received. Bail
+				//panic("Waited long enough but no data frames received")
+				debug.Println("Waited long enough but no data frames received")
 				endflag = 2
 				break
 			}

@@ -67,7 +67,7 @@ type Session struct {
 	server       *http.Server // http server for this session
 	nextStream   streamID     // the next stream ID
 	closed       bool         // is this session closed?
-	goaway_recvd bool         // recieved goaway
+	goaway_recvd bool         // received goaway
 	headerWriter *headerWriter
 	headerReader *headerReader
 	settings     *settings

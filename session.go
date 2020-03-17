@@ -247,7 +247,7 @@ func (s *Session) processControlFrame(frame controlFrame) (err error) {
 					break
 				case <-deadline:
 					//unsuccessfully waited for FIN
-					debug.Println("Waited long enough but no data frames recieved")
+					debug.Println("Waited long enough but no data frames received")
 					controlflag = 2
 					break
 				}
@@ -292,7 +292,7 @@ func (s *Session) processGoaway(frame controlFrame) {
 	}
 
 	lst_id := frame.streamID()
-	debug.Printf("GOAWAY Frame recieved, Last-good-stream-ID: %d, Status Code: %d", lst_id, status)
+	debug.Printf("GOAWAY Frame received, Last-good-stream-ID: %d, Status Code: %d", lst_id, status)
 
 	//to check if some stream with ID < Last-good-stream-ID is open
 	closeSessionFlag := 0
