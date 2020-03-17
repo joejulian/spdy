@@ -1,7 +1,7 @@
 package main
 
 import (
-        "crypto/tls"
+	"crypto/tls"
 	"fmt"
 	"github.com/amahi/spdy"
 	"io"
@@ -15,15 +15,15 @@ func handle(err error) {
 }
 
 func main() {
-        cert, err := tls.LoadX509KeyPair("client.pem", "client.key")
-        if err != nil {
-                fmt.Printf("server: loadkeys: %s", err)
-        }
-        config := tls.Config{Certificates: []tls.Certificate{cert}, InsecureSkipVerify: true, NextProtos: []string{"spdy/3"}}
-        conn, err := tls.Dial("tcp", "127.0.0.1:4040", &config)
-        if err != nil {
-                fmt.Printf("client: dial: %s", err)
-        }
+	cert, err := tls.LoadX509KeyPair("client.pem", "client.key")
+	if err != nil {
+		fmt.Printf("server: loadkeys: %s", err)
+	}
+	config := tls.Config{Certificates: []tls.Certificate{cert}, InsecureSkipVerify: true, NextProtos: []string{"spdy/3"}}
+	conn, err := tls.Dial("tcp", "127.0.0.1:4040", &config)
+	if err != nil {
+		fmt.Printf("client: dial: %s", err)
+	}
 	client, err := spdy.NewClientConn(conn)
 	handle(err)
 	req, err := http.NewRequest("GET", "http://localhost:4040/banana", nil)

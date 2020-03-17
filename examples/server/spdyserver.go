@@ -12,9 +12,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handler)
-	err := spdy.ListenAndServe("localhost:4040",nil)
+	err := spdy.ListenAndServe("localhost:4040", nil)
 	if err != nil {
 		fmt.Println(err)
 	}
 }
-
