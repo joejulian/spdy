@@ -246,7 +246,7 @@ func (frame frameSynStream) Data() []byte {
 	// associated-to-stream-id FIXME in the long term
 	binary.Write(buf, binary.BigEndian, frame.associated_stream&0x7fffffff)
 	// Priority & unused/reserved
-	var misc uint16 = uint16((frame.priority & 0x7) << 13)
+	var misc uint16 = (uint16(frame.priority) & 0x7) << 13
 	binary.Write(buf, binary.BigEndian, misc)
 	// debug.Println("Before header:", buf.Bytes())
 	frame.session.headerWriter.writeHeader(buf, frame.header)

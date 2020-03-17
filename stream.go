@@ -509,7 +509,7 @@ func (s *Stream) Write(p []byte) (n int, err error) {
 		debug.Printf("Stream #%d: got %d bytes of flow", s.id, window)
 		if !ok || s.closed {
 			debug.Printf("Stream #%d: flow closed!", s.id)
-			return 0, errors.New(fmt.Sprintf("Stream #%d closed while writing"))
+			return 0, errors.New(fmt.Sprintf("Stream #%d closed while writing", s.id))
 		}
 		flow += window
 	}
@@ -740,8 +740,8 @@ func (s *Stream) flowManager(initial int32, in <-chan int32, out chan<- int32) {
 			sfcw += v
 		}
 		if s.closed {
+			debug.Printf("Stream #%d flow manager done", s.id)
 			return
 		}
 	}
-	debug.Printf("Stream #%d flow manager done", s.id)
 }

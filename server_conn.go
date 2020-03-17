@@ -204,7 +204,7 @@ func (srv *Server) ListenAndServeTLSSpdyOnly(certFile, keyFile string) error {
 	}
 	config := &tls.Config{}
 	if srv.TLSConfig != nil {
-		*config = *srv.TLSConfig
+		*config = *srv.TLSConfig.Clone()
 	}
 	if config.NextProtos == nil {
 		config.NextProtos = []string{"spdy/3.1", "spdy/3"}

@@ -47,12 +47,11 @@ func (rw *ResponseRecorder) Write(buf []byte) (int, error) {
 	if rw.Body != nil {
 		len, err := rw.Body.Write(buf)
 		return len, err
-	} else {
-		rw.Body = new(bytes.Buffer)
-		len, err := rw.Body.Write(buf)
-		return len, err
 	}
-	return len(buf), nil
+
+	rw.Body = new(bytes.Buffer)
+	len, err := rw.Body.Write(buf)
+	return len, err
 }
 
 // WriteHeader sets rw.Code.
