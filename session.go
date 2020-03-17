@@ -112,6 +112,7 @@ func (s *Session) session_loop(sender_done, receiver_done <-chan bool) (err erro
 				err = s.processDataFrame(frame)
 			}
 			if err != nil {
+				debug.Printf("error in received frame: %+v\n", err)
 				return
 			}
 		case ns, ok := <-s.new_stream:
@@ -119,6 +120,7 @@ func (s *Session) session_loop(sender_done, receiver_done <-chan bool) (err erro
 			if ok {
 				s.streams[ns.id] = ns
 			} else {
+				debug.Println("not ok in new_stream")
 				return
 			}
 		case os, ok := <-s.end_stream:
@@ -126,6 +128,7 @@ func (s *Session) session_loop(sender_done, receiver_done <-chan bool) (err erro
 			if ok {
 				delete(s.streams, os.id)
 			} else {
+				debug.Println("not ok in end_stream")
 				return
 			}
 		case _, _ = <-receiver_done:
